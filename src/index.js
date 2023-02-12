@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
+import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -11,7 +12,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
-        {/* <Route path="/signin" element={<SignIn />} /> */}
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

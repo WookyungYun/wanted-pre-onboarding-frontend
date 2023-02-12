@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -18,8 +19,6 @@ function SignUp() {
       setIsPassword(true);
     }
   };
-
-  const handleSignUpButton = () => {};
 
   const handleButton = () => {
     if (isEmail && isPassword) {
@@ -56,14 +55,15 @@ function SignUp() {
           onChange={handlePw}
         />
       </div>
-      <button
-        type="submit"
-        data-testid="signup-button"
-        onClick={handleSignUpButton}
-        disabled={handleButton()}
-      >
-        회원가입
-      </button>
+      <Link to={"/signin"}>
+        <button
+          type="submit"
+          data-testid="signup-button"
+          disabled={handleButton()}
+        >
+          회원가입
+        </button>
+      </Link>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { api } from "./api/api";
 import Input from "./Input";
 
 function SignIn() {
@@ -24,6 +25,23 @@ function SignIn() {
       return false;
     } else return true;
   };
+
+  const handleClick = async () => {
+    try {
+      const result = await api.post("/auth/signin", {
+        email,
+        password,
+      });
+      alert("로그인 성공");
+      localStorage.setItem("token", result.data.access_token);
+    } catch (error) {
+      if (error.response.status === 401) {
+        alert("이메일이 없거나 비밀번호가 일치하지 않습니다.");
+      } else if (error.response.status === 404) {
+        alert("존재하지않는 이메일입니다.");
+      }
+    }
+  };
   return (
     <>
       <div>
@@ -35,7 +53,11 @@ function SignIn() {
         handleEmail={handleEmail}
         handlePw={handlePw}
       />
-      <button data-testid="signin-button" disabled={handleButton()}>
+      <button
+        data-testid="signin-button"
+        onClick={handleClick}
+        disabled={handleButton()}
+      >
         로그인
       </button>
     </>

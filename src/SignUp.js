@@ -1,12 +1,26 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { api } from "./api/api";
 import Input from "./Input";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
+
+  const handleClick = async () => {
+    try {
+      const result = await api.post("/auth/signup", {
+        email,
+        password,
+      });
+      navigate("/signin");
+    } catch {
+      alert("동일한 이메일 있음");
+    }
+  };
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -44,15 +58,14 @@ function SignUp() {
         handleEmail={handleEmail}
         handlePw={handlePw}
       />
-      <Link to={"/signin"}>
-        <button
-          type="submit"
-          data-testid="signup-button"
-          disabled={handleButton()}
-        >
-          회원가입
-        </button>
-      </Link>
+      <button
+        type="submit"
+        data-testid="signup-button"
+        onClick={handleClick}
+        disabled={handleButton()}
+      >
+        회원가입
+      </button>
     </>
   );
 }

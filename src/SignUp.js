@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Input from "./Input";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -34,27 +35,15 @@ function SignUp() {
 
   return (
     <>
-      <div className="App">
-        <header className="App-header">
-          <p>회원가입</p>
-        </header>
-        Email
-        <input
-          type="text"
-          data-testid="email-input"
-          autoComplete="off"
-          value={email}
-          onChange={handleEmail}
-        />
-        password
-        <input
-          type="text"
-          data-testid="password-input"
-          autoComplete="off"
-          value={password}
-          onChange={handlePw}
-        />
-      </div>
+      <header className="App-header">
+        <p>회원가입</p>
+      </header>
+      <Input
+        email={email}
+        password={password}
+        handleEmail={handleEmail}
+        handlePw={handlePw}
+      />
       <Link to={"/signin"}>
         <button
           type="submit"

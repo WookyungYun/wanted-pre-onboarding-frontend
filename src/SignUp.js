@@ -12,7 +12,7 @@ function SignUp() {
 
   const handleClick = async () => {
     try {
-      const result = await api.post("/auth/signup", {
+      await api.post("/auth/signup", {
         email,
         password,
       });

@@ -1,11 +1,9 @@
-import TodoInsert from "./TodoInsert";
-import TodoListView from "./TodoListView";
+import TodoContainer from "./TodoContainer";
 
 function Todo() {
   return (
     <>
-      <TodoInsert />
-      <TodoListView />
+      <TodoContainer />
     </>
   );
 }

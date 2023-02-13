@@ -1,18 +1,18 @@
-function TodoListView() {
+function TodoListView({ items }) {
+  console.log(items);
+  const handleCheckBox = () => {
+    console.log("클릭");
+  };
   return (
     <>
-      <li>
-        <label>
-          <input type="checkbox" />
-          <span>TODO 1</span>
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" />
-          <span>TODO 2</span>
-        </label>
-      </li>
+      {items.map((todoItem) => (
+        <li key={todoItem.id}>
+          <label>
+            <input type="checkbox" onChange={handleCheckBox} />
+            <span>{todoItem.todo}</span>
+          </label>
+        </li>
+      ))}
     </>
   );
 }

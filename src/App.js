@@ -10,7 +10,6 @@ import Todo from "./components/page/Todo";
 function App() {
   const [access, setAccess] = useState("");
   const route = useLocation();
-  console.log(route);
   useEffect(() => {
     setAccess(localStorage.getItem("token"));
   }, [route.pathname]);

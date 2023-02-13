@@ -17,6 +17,7 @@ function SignUp() {
         email,
         password,
       });
+
       navigate("/signin");
     } catch {
       alert("동일한 이메일 있음");

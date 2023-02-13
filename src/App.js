@@ -10,9 +10,11 @@ import Todo from "./components/page/Todo";
 function App() {
   const [access, setAccess] = useState("");
   const route = useLocation();
+
   useEffect(() => {
     setAccess(localStorage.getItem("token"));
   }, [route.pathname]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

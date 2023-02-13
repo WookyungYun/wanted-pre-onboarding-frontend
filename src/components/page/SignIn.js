@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import Input from "../common/Input";
 
 function SignIn() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmail, setIsEmail] = useState(false);
@@ -35,6 +37,7 @@ function SignIn() {
       console.log(result);
       alert("로그인 성공");
       localStorage.setItem("token", result.data.access_token);
+      navigate("/todo");
     } catch (error) {
       if (error) {
         alert("이메일이 없거나 비밀번호가 일치하지 않습니다.");

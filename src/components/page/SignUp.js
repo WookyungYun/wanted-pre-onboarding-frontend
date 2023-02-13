@@ -54,10 +54,20 @@ function SignUp() {
         <p>회원가입</p>
       </header>
       <Input
-        email={email}
-        password={password}
-        handleEmail={handleEmail}
-        handlePw={handlePw}
+        type="text"
+        id="email"
+        testid="email-input"
+        value={email}
+        onChange={handleEmail}
+        text="Email"
+      />
+      <Input
+        type="text"
+        id="password"
+        testid="password-input"
+        value={password}
+        onChange={handlePw}
+        text="Password"
       />
       <Button
         type="submit"

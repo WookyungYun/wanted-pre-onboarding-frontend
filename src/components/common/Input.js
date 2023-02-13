@@ -1,23 +1,16 @@
-function Input({ email, password, handleEmail, handlePw }) {
+function Input({ type, id, testid, value, onChange, text }) {
   return (
-    <>
-      Email
+    <label htmlFor={id}>
+      {text}
       <input
-        type="text"
-        data-testid="email-input"
+        type={type}
+        id={id}
+        data-testid={testid}
         autoComplete="off"
-        value={email}
-        onChange={handleEmail}
+        value={value}
+        onChange={onChange}
       />
-      password
-      <input
-        type="text"
-        data-testid="password-input"
-        autoComplete="off"
-        value={password}
-        onChange={handlePw}
-      />
-    </>
+    </label>
   );
 }
 

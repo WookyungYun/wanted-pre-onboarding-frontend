@@ -5,35 +5,52 @@ import { api } from "../../api/api";
 
 function TodoItem({ item }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isChecked, setIsChecked] = useState(true);
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-  const handleEditButton = () => {
-    setIsOpen((prev) => !prev);
-    editTodo(value, isChecked);
-  };
+
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
   };
 
   const handleCheckBox = () => {
-    setIsChecked((prev) => !prev);
-    editTodo(item.todo, isChecked);
+    if (item.isCompleted) {
+      editTodo(item.todo, false);
+    } else {
+      editTodo(item.todo, true);
+    }
+  };
+
+  const handleEditButton = () => {
+    setIsOpen((prev) => !prev);
+    editTodo(value, item.isCompleted);
+  };
+
+  const handleDeleteButton = () => {
+    deleteTodo();
   };
 
   const editTodo = async (value, isCompleted) => {
     try {
       await api.put(`/todos/${item.id}`, {
         todo: value,
-        isCompleted: isCompleted,
+        isCompleted,
       });
-    } catch {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  console.log(item);
+  const deleteTodo = async () => {
+    try {
+      api.delete(`/todos/${item.id}`);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <label>
       {item.isCompleted ? (
@@ -57,7 +74,7 @@ function TodoItem({ item }) {
         <>
           <span>{item.todo}</span>
           <Button onClick={handleToggle} text="수정" />
-          <Button text="삭제" />
+          <Button onClick={handleDeleteButton} text="삭제" />
         </>
       )}
     </label>

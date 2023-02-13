@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
+import Button from "../common/Button";
 import Input from "../common/Input";
 
 function SignUp() {
@@ -58,14 +59,13 @@ function SignUp() {
         handleEmail={handleEmail}
         handlePw={handlePw}
       />
-      <button
+      <Button
         type="submit"
-        data-testid="signup-button"
+        testid="signup-button"
         onClick={handleClick}
         disabled={handleButton()}
-      >
-        회원가입
-      </button>
+        text="회원가입"
+      />
     </>
   );
 }

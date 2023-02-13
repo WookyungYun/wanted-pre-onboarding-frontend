@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
+import Button from "../common/Button";
 import Input from "../common/Input";
 
 function SignIn() {
@@ -57,13 +58,13 @@ function SignIn() {
         handleEmail={handleEmail}
         handlePw={handlePw}
       />
-      <button
-        data-testid="signin-button"
+      <Button
+        type="submit"
+        testid="signin-button"
         onClick={handleClick}
         disabled={handleButton()}
-      >
-        로그인
-      </button>
+        text="로그인"
+      />
     </>
   );
 }

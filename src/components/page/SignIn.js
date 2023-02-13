@@ -1,26 +1,12 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { api } from "./api/api";
-import Input from "./Input";
+import { useState } from "react";
+import { api } from "../../api/api";
+import Input from "../common/Input";
 
-function SignUp() {
-  const navigate = useNavigate();
+function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
-
-  const handleClick = async () => {
-    try {
-      await api.post("/auth/signup", {
-        email,
-        password,
-      });
-      navigate("/signin");
-    } catch {
-      alert("동일한 이메일 있음");
-    }
-  };
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -34,24 +20,34 @@ function SignUp() {
       setIsPassword(true);
     }
   };
-
   const handleButton = () => {
     if (isEmail && isPassword) {
       return false;
     } else return true;
   };
 
-  useEffect(() => {
-    //값 초기화
-    setIsEmail(false);
-    setIsPassword(false);
-  }, []);
-
+  const handleClick = async () => {
+    try {
+      const result = await api.post("/auth/signin", {
+        email,
+        password,
+      });
+      console.log(result);
+      alert("로그인 성공");
+      localStorage.setItem("token", result.data.access_token);
+    } catch (error) {
+      if (error) {
+        alert("이메일이 없거나 비밀번호가 일치하지 않습니다.");
+      } else if (error.response.status === 404) {
+        alert("존재하지않는 이메일입니다.");
+      }
+    }
+  };
   return (
     <>
-      <header className="App-header">
-        <p>회원가입</p>
-      </header>
+      <div>
+        <h1>로그인</h1>
+      </div>
       <Input
         email={email}
         password={password}
@@ -59,15 +55,13 @@ function SignUp() {
         handlePw={handlePw}
       />
       <button
-        type="submit"
-        data-testid="signup-button"
+        data-testid="signin-button"
         onClick={handleClick}
         disabled={handleButton()}
       >
-        회원가입
+        로그인
       </button>
     </>
   );
 }
-
-export default SignUp;
+export default SignIn;

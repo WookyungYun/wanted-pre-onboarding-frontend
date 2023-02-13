@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/page/Home";
 import NonLoginRoute from "./route/NonLoginRoute";
@@ -21,10 +21,7 @@ function App() {
         path="/signin"
         element={<PrivateRoute authenticated={access} component={<SignIn />} />}
       />
-      <Route
-        path="/todo"
-        element={<NonLoginRoute authenticated={access} component={<Todo />} />}
-      />
+      <Route path="/todo" element={<NonLoginRoute component={<Todo />} />} />
     </Routes>
   );
 }

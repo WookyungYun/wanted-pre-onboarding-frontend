@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function NonLoginRoute({ authenticated, component: Component }) {
-  return authenticated ? Component : <Navigate to="/signin" />;
+function NonLoginRoute({ component: Component }) {
+  const access = localStorage.getItem("token");
+  return access ? Component : <Navigate to="/signin" />;
 }
 export default NonLoginRoute;

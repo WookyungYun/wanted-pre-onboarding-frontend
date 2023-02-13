@@ -63,18 +63,39 @@ function TodoItem({ item }) {
         <>
           <Input
             type="text"
+            testid="modify-input"
             id={item.id}
             value={value}
             onChange={handleChange}
           />
-          <Button onClick={handleEditButton} text="제출" />
-          <Button onClick={handleToggle} text="취소" />
+          <Button
+            type="submit"
+            testid="submit-button"
+            onClick={handleEditButton}
+            text="제출"
+          />
+          <Button
+            type="submit"
+            testid="cancel-button"
+            onClick={handleToggle}
+            text="취소"
+          />
         </>
       ) : (
         <>
           <span>{item.todo}</span>
-          <Button onClick={handleToggle} text="수정" />
-          <Button onClick={handleDeleteButton} text="삭제" />
+          <Button
+            type="submit"
+            testid="modify-button"
+            onClick={handleToggle}
+            text="수정"
+          />
+          <Button
+            type="submit"
+            testid="delete-button"
+            onClick={handleDeleteButton}
+            text="삭제"
+          />
         </>
       )}
     </label>

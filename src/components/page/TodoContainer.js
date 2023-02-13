@@ -10,12 +10,12 @@ function TodoContainer() {
   const todoItems = async () => {
     try {
       const result = await api.get("/todos");
-      console.log(result);
       setItems(result.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleClick = async () => {
     try {
       const result = await api.post("/todos", {
@@ -28,12 +28,15 @@ function TodoContainer() {
       console.log(error);
     }
   };
+
   const handleChange = (e) => {
     setTodo(e.target.value);
   };
+
   useEffect(() => {
     todoItems();
-  }, []);
+  }, [items]);
+
   return (
     <>
       <TodoInsert

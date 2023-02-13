@@ -1,14 +1,25 @@
+import { useState } from "react";
 import Button from "../common/Button";
+import Input from "../common/Input";
 
 function TodoInsert() {
+  const [newTodo, setNewTodo] = useState("");
   const handleClick = () => {
     console.log("버튼활용성공");
   };
+  const handleChange = (e) => {
+    setNewTodo(e.target.value);
+  };
   return (
     <>
-      <label>
-        <input type="text" data-testid="new-todo-input" />
-      </label>
+      <Input
+        type="text"
+        id="todo-input"
+        testid="new-todo-input"
+        value={newTodo}
+        onChange={handleChange}
+      />
+
       <Button
         type="submit"
         testid="new-todo-add-button"

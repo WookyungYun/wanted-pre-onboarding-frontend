@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "./components/page/Home";
-import NonLoginRoute from "./route/NonLoginRoute";
-import PrivateRoute from "./route/PrivateRoute";
-import SignIn from "./components/page/SignIn";
-import SignUp from "./components/page/SignUp";
-import Todo from "./components/page/Todo";
+import Home from "./pages/Home";
+import NonLoginRoute from "./components/route/NonLoginRoute";
+import PrivateRoute from "./components/route/PrivateRoute";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Todo from "./pages/Todo";
 
 function App() {
   const [access, setAccess] = useState("");

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
+import Button from "../common/Button";
 import Input from "../common/Input";
 
 function SignUp() {
@@ -16,6 +17,7 @@ function SignUp() {
         email,
         password,
       });
+
       navigate("/signin");
     } catch {
       alert("동일한 이메일 있음");
@@ -53,19 +55,28 @@ function SignUp() {
         <p>회원가입</p>
       </header>
       <Input
-        email={email}
-        password={password}
-        handleEmail={handleEmail}
-        handlePw={handlePw}
+        type="text"
+        id="email"
+        testid="email-input"
+        value={email}
+        onChange={handleEmail}
+        text="Email"
       />
-      <button
+      <Input
+        type="text"
+        id="password"
+        testid="password-input"
+        value={password}
+        onChange={handlePw}
+        text="Password"
+      />
+      <Button
         type="submit"
-        data-testid="signup-button"
+        testid="signup-button"
         onClick={handleClick}
         disabled={handleButton()}
-      >
-        회원가입
-      </button>
+        text="회원가입"
+      />
     </>
   );
 }

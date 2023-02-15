@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
+import Button from "../common/Button";
 import Input from "../common/Input";
 
 function SignIn() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmail, setIsEmail] = useState(false);
@@ -35,6 +38,7 @@ function SignIn() {
       console.log(result);
       alert("로그인 성공");
       localStorage.setItem("token", result.data.access_token);
+      navigate("/todo");
     } catch (error) {
       if (error) {
         alert("이메일이 없거나 비밀번호가 일치하지 않습니다.");
@@ -49,18 +53,28 @@ function SignIn() {
         <h1>로그인</h1>
       </div>
       <Input
-        email={email}
-        password={password}
-        handleEmail={handleEmail}
-        handlePw={handlePw}
+        type="text"
+        id="email"
+        testid="email-input"
+        value={email}
+        onChange={handleEmail}
+        text="Email"
       />
-      <button
-        data-testid="signin-button"
+      <Input
+        type="text"
+        id="password"
+        testid="password-input"
+        value={password}
+        onChange={handlePw}
+        text="Password"
+      />
+      <Button
+        type="submit"
+        testid="signin-button"
         onClick={handleClick}
         disabled={handleButton()}
-      >
-        로그인
-      </button>
+        text="로그인"
+      />
     </>
   );
 }

@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./components/page/Home";
 import NonLoginRoute from "./route/NonLoginRoute";
 import PrivateRoute from "./route/PrivateRoute";
@@ -8,7 +8,12 @@ import SignUp from "./components/page/SignUp";
 import Todo from "./components/page/Todo";
 
 function App() {
-  const access = localStorage.getItem("token");
+  const [access, setAccess] = useState("");
+  const route = useLocation();
+
+  useEffect(() => {
+    setAccess(localStorage.getItem("token"));
+  }, [route.pathname]);
 
   return (
     <Routes>

@@ -1,5 +1,11 @@
+import TodoContainer from "./TodoContainer";
+
 function Todo() {
-  return <>todo!! </>;
+  return (
+    <>
+      <TodoContainer />
+    </>
+  );
 }
 
 export default Todo;

@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../api/api";
-import Button from "../common/Button";
-import Input from "../common/Input";
+import { api } from "../api/api";
+import Button from "../components/common/Button";
+import Input from "../components/common/Input";
 
-function SignIn() {
+function SignUp() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
+
+  const handleClick = async () => {
+    try {
+      await api.post("/auth/signup", {
+        email,
+        password,
+      });
+
+      navigate("/signin");
+    } catch {
+      alert("동일한 이메일 있음");
+    }
+  };
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -23,35 +36,24 @@ function SignIn() {
       setIsPassword(true);
     }
   };
+
   const handleButton = () => {
     if (isEmail && isPassword) {
       return false;
     } else return true;
   };
 
-  const handleClick = async () => {
-    try {
-      const result = await api.post("/auth/signin", {
-        email,
-        password,
-      });
-      console.log(result);
-      alert("로그인 성공");
-      localStorage.setItem("token", result.data.access_token);
-      navigate("/todo");
-    } catch (error) {
-      if (error) {
-        alert("이메일이 없거나 비밀번호가 일치하지 않습니다.");
-      } else if (error.response.status === 404) {
-        alert("존재하지않는 이메일입니다.");
-      }
-    }
-  };
+  useEffect(() => {
+    //값 초기화
+    setIsEmail(false);
+    setIsPassword(false);
+  }, []);
+
   return (
     <>
-      <div>
-        <h1>로그인</h1>
-      </div>
+      <header className="App-header">
+        <p>회원가입</p>
+      </header>
       <Input
         type="text"
         id="email"
@@ -70,12 +72,13 @@ function SignIn() {
       />
       <Button
         type="submit"
-        testid="signin-button"
+        testid="signup-button"
         onClick={handleClick}
         disabled={handleButton()}
-        text="로그인"
+        text="회원가입"
       />
     </>
   );
 }
-export default SignIn;
+
+export default SignUp;
